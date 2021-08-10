@@ -13,104 +13,77 @@ use Omnipay\Tests\TestCase;
 
 class RedirectCompletePurchaseResponseTest extends TestCase
 {
-    private $data;
-
-    private $expected = [
-        'Code' => 0,
-        'Result' => [
-            'Status' => 'captured'
-        ]
-    ];
-
-
     public function setUp()
     {
-        var_dump('1000000000010000000000100000000001000000000010000000000');
-
-        $this->data = [
-            'version' => '6.9',
-            'request_timestamp' => '2015-09-17 10:30:12',
-            'merchant_id' => 'merchant_test',
-            'order_id' => '00000000000000123456',
-            'invoice_no' => '00000000000000123456',
-            'currency' => '764',
-            'amount' => '000000010050',
-            'transaction_ref' => '12345',
-            'approval_code' => '103864',
-            'transaction_datetime' => '2015-09-17 10:30:09',
-            'payment_channel' => '001',
-            'payment_status' => '000',
-            'channel_response_code' => '000',
-            'channel_response_desc' => 'Success',
-            'masked_pan' => '444321XXXXXX3212',
-            'user_defined_1' => '',
-            'user_defined_2' => '',
-            'user_defined_3' => '',
-            'user_defined_4' => '',
-            'user_defined_5' => '',
-            'browser_info' => '',
-            'eci' => '6',
-            'hash_value' => '1234567',
-            'computed_hash_value' => '1234567'
+        $this->data  = [
+            "Code" => 0,
+            "Signature" => "1f51786246a940677afe71f6968972fd46500bd1",
+            "Result" => [
+                "3DSecureUrl" => "https://www.easytransac.com/api/payment/3dsecure/a1b2c3d4",
+                "OperationType" => "payment",
+                "PaymentMethod" => "Api",
+                "ApplicationType" => "Api",
+                "Tid" => "4bEp3k1v",
+                "Uid" => "ccc",
+                "OrderId" => "PO_123",
+                "Status" => "pending",
+                "Date" => "2018-08-06 10 =>54 =>18",
+                "Amount" => 2.5,
+                "ClientIP" => "22.22.22.22",
+                "ClientIPCountry" => "USA",
+                "Currency" => "EUR",
+                "CurrencyText" => "Euro",
+                "CurrencySymbol" => "€",
+                "FixFees" => 0,
+                "Message" => "La transaction est en cours",
+                "3DSecure" => "yes",
+                "OneClick" => "yes",
+                "Alias" => "Xagv6r",
+                "CardNumber" => "************6629",
+                "CardMonth" => 1,
+                "CardYear" => 2025,
+                "CardType" => "MASTERCARD",
+                "CardCountry" => "FRA",
+                "Test" => "yes",
+                "Language" => "FRE",
+                "Error" => "",
+                "AdditionalError" => [],
+                "Client" => [
+                    "Id" => "aaabbb1",
+                    "Email" => "test@test.com",
+                    "Firstname" => "John",
+                    "Lastname" => "Doe",
+                    "Address" => "26 green street",
+                    "ZipCode" => 75001,
+                    "City" => "Paris"
+                ]
+            ]
         ];
     }
 
-    public function testConstruct_payment_response_is_pending()
+    public function testPurchasePending()
     {
-        $this->data['payment_status'] = '001';
+        $response = new PurchaseResponse($this->getMockRequest(), $this->data);
 
-        $response = new RedirectCompletePurchaseResponse($this->getMockRequest(), $this->data);
-
-        $this->assertFalse($response->isSuccessful());
         $this->assertTrue($response->isPending());
+        $this->assertFalse($response->isSuccessful());
         $this->assertFalse($response->isCancelled());
-        $this->assertEquals('Pending (Waiting customer to pay)', $response->getMessage());
-        $this->assertEquals('12345', $response->getTransactionReference());
-        $this->assertSame(123456, $response->getTransactionId());
+        $this->assertTrue($response->isRedirect());
+        $this->assertEquals('https://www.easytransac.com/api/payment/3dsecure/a1b2c3d4', $response->getRedirectUrl());
+        $this->assertEquals('4bEp3k1v', $response->getTransactionReference());
+        $this->assertEquals('PO_123', $response->getTransactionId());
         $this->assertFalse($response->isTransparentRedirect());
     }
 
-    public function testConstruct_payment_response_success()
+    public function testPurchaseFailed()
     {
-        $response = new RedirectCompletePurchaseResponse($this->getMockRequest(), $this->data);
-
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isPending());
-        $this->assertFalse($response->isRedirect());
-        $this->assertFalse($response->isCancelled());
-        $this->assertEquals('Success using credit/debit card (Authorized) or Success when paid with cash channel (Paid)', $response->getMessage());
-        $this->assertEquals('12345', $response->getTransactionReference());
-        $this->assertSame(123456, $response->getTransactionId());
-        $this->assertFalse($response->isTransparentRedirect());
-    }
-
-    public function testConstruct_payment_response_fail()
-    {
-        $this->data['payment_status'] = '002';
-
-        $response = new RedirectCompletePurchaseResponse($this->getMockRequest(), $this->data);
+        $this->data['Status'] = 'failed';
+        $response = new PurchaseResponse($this->getMockRequest(), $this->data);
 
         $this->assertFalse($response->isSuccessful());
-        $this->assertFalse($response->isRedirect());
         $this->assertFalse($response->isCancelled());
-        $this->assertEquals('Rejected (Failed payment)', $response->getMessage());
-        $this->assertEquals('12345', $response->getTransactionReference());
-        $this->assertSame(123456, $response->getTransactionId());
-        $this->assertFalse($response->isTransparentRedirect());
-    }
-
-    public function testConstruct_invalid_hash_value()
-    {
-        $this->data['computed_hash_value'] = '000000';
-
-        $response = new RedirectCompletePurchaseResponse($this->getMockRequest(), $this->data);
-
-        $this->assertFalse($response->isSuccessful());
-        $this->assertFalse($response->isRedirect());
-        $this->assertFalse($response->isCancelled());
-        $this->assertEquals('Invalid hash value', $response->getMessage());
-        $this->assertEquals('12345', $response->getTransactionReference());
-        $this->assertSame(123456, $response->getTransactionId());
+        $this->assertEquals('4bEp3k1v', $response->getTransactionReference());
+        $this->assertEquals('PO_123', $response->getTransactionId());
         $this->assertFalse($response->isTransparentRedirect());
     }
 }

@@ -12,12 +12,12 @@ use Omnipay\Tests\TestCase;
 
 class CompletePurchaseRequestTest extends TestCase
 {
-    private CompletePurchaseRequest $request;
+    private PurchaseRequest $request;
     private $options;
 
     public function setUp()
     {
-        $this->request = new CompletePurchaseRequest($this->getHttpClient(), $this->getHttpRequest());
+        $this->request = new PurchaseRequest($this->getHttpClient(), $this->getHttpRequest());
         $this->options = [
             'card' => [
                 'firstName' => 'Cusfirstname',
@@ -79,6 +79,6 @@ class CompletePurchaseRequestTest extends TestCase
     public function testSendData()
     {
         $this->request->initialize($this->options);
-        $this->assertInstanceOf(CompletePurchaseResponse::class, $this->request->sendData($this->request->getData()));
+        $this->assertInstanceOf(PurchaseResponse::class, $this->request->sendData($this->request->getData()));
     }
 }

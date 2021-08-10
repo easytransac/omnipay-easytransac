@@ -3,7 +3,6 @@
 namespace Omnipay\CreditCardPaymentProcessor;
 
 use Omnipay\Common\AbstractGateway;
-use Omnipay\CreditCardPaymentProcessor\Message\CompletePurchaseRequest;
 use Omnipay\CreditCardPaymentProcessor\Message\PurchaseRequest;
 
 /**
@@ -37,6 +36,6 @@ class Gateway extends AbstractGateway
 
     public function completePurchase(array $parameters = array())
     {
-        return $this->createRequest(CompletePurchaseRequest::class, $parameters);
+        return $this->createRequest(PurchaseRequest::class, $parameters);
     }
 }
