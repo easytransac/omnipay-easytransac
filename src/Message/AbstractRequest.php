@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\CreditCardPaymentProcessor\Message;
+namespace Omnipay\Easytransac\Message;
 
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {

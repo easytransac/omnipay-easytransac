@@ -1,9 +1,9 @@
 <?php
 
-namespace Omnipay\CreditCardPaymentProcessor;
+namespace Omnipay\Easytransac;
 
 use Omnipay\Common\AbstractGateway;
-use Omnipay\CreditCardPaymentProcessor\Message\PurchaseRequest;
+use Omnipay\Easytransac\Message\PurchaseRequest;
 
 /**
  * Easytransac Gateway Driver for Omnipay
@@ -16,7 +16,7 @@ class Gateway extends AbstractGateway
 
     public function getName()
     {
-        return 'Easytransac Gateway';
+        return 'Easytransac';
     }
 
     public function getApiKey()

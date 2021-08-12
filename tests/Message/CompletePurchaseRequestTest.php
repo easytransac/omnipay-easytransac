@@ -6,7 +6,7 @@
  * Time: 11:18 AM
  */
 
-namespace Omnipay\CreditCardPaymentProcessor\Message;
+namespace Omnipay\Easytransac\Message;
 
 use Omnipay\Tests\TestCase;
 

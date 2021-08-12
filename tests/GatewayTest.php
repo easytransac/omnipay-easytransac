@@ -1,12 +1,12 @@
 <?php
 
-namespace Omnipay\CreditCardPaymentProcessor;
+namespace Omnipay\Easytransac;
 
 use Omnipay\Tests\GatewayTestCase;
 
 class GatewayTest extends GatewayTestCase
 {
-    protected Gateway $gateway;
+    protected $gateway;
 
     /** @var array */
     private $options;
@@ -45,6 +45,7 @@ class GatewayTest extends GatewayTestCase
     public function testPurchase()
     {
         $response = $this->gateway->purchase($this->options)->send();
+        var_dump($response);
 
         $this->assertTrue($response->isSuccessful());
         $this->assertTrue($response->isRedirect());

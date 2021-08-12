@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\CreditCardPaymentProcessor\Message;
+namespace Omnipay\Easytransac\Message;
 
 
 use Omnipay\Common\Message\AbstractResponse;

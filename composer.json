@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Omnipay\\CreditCardPaymentProcessor\\": "src/"
+            "Omnipay\\Easytransac\\": "src/"
         }
     }
 }

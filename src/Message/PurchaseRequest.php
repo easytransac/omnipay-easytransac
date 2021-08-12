@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\CreditCardPaymentProcessor\Message;
+namespace Omnipay\Easytransac\Message;
 
 class PurchaseRequest extends AbstractRequest
 {
