@@ -9,7 +9,7 @@
 namespace Omnipay\Easytransac\Message;
 
 use Omnipay\Tests\TestCase;
-
+var_dump(phpversion());
 class CompletePurchaseRequestTest extends TestCase
 {
     private PurchaseRequest $request;

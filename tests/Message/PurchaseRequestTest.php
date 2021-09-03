@@ -7,7 +7,6 @@ use Omnipay\Tests\TestCase;
 class PurchaseRequestTest extends TestCase
 {
     private PurchaseRequest $request;
-
     private $options;
 
     public function setUp()

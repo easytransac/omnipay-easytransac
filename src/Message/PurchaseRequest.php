@@ -4,7 +4,10 @@ namespace Omnipay\Easytransac\Message;
 
 class PurchaseRequest extends AbstractRequest
 {
-    public function getData()
+    /**
+     * @throws \Omnipay\Common\Exception\InvalidRequestException
+     */
+    public function getData(): array
     {
         $data = [
             'Amount' => $this->getAmount(),
@@ -22,10 +25,9 @@ class PurchaseRequest extends AbstractRequest
             'Phone' => $this->getCard()->getBillingPhone(),
             'BirthDate' => $this->getCard()->getBirthday('Y-m-d'),
             '3DS' => $this->get3DS(),
-            'ReturnUrl' => $this->getReturnUrl(),
             'CardNumber' => $this->getCard()->getNumber(),
             'CardYear' =>  $this->getCard()->getExpiryYear(),
-            'CardMonth' => $this->getCard()->getExpiryMonth(),
+            'CardMonth' => sprintf("%02d", $this->getCard()->getExpiryMonth()),
             'CardCVV' => $this->getCard()->getCvv(),
             'ReturnUrl' => $this->getReturnUrl(),
         ];
@@ -36,8 +38,8 @@ class PurchaseRequest extends AbstractRequest
         return $data;
     }
 
-    public function sendData($data)
+    public function getEndpoint()
     {
-        return $this->response = new PurchaseResponse($this, $data);
+        return $this->endpoint.'/payment/direct';
     }
 }

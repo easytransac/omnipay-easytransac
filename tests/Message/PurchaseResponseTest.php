@@ -53,6 +53,7 @@ class PurchaseResponseTest extends TestCase
     public function testPurchaseSuccess()
     {
         $response = new PurchaseResponse($this->getMockRequest(), $this->mockResponse);
+        var_dump($response);
         $this->assertEquals($response->getCode(), 0);
         $this->assertTrue($response->isSuccessful());
         $this->assertFalse($response->isRedirect());

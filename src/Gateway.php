@@ -2,40 +2,44 @@
 
 namespace Omnipay\Easytransac;
 
-use Omnipay\Common\AbstractGateway;
 use Omnipay\Easytransac\Message\PurchaseRequest;
 
 /**
  * Easytransac Gateway Driver for Omnipay
- *
+ * @see \Omnipay\Easytransac\AbstractGateway
  * This driver is based on Easytransac API documentation
  * @link https://www.easytransac.com/en/documentation
  */
 class Gateway extends AbstractGateway
 {
-
-    public function getName()
+    /**
+     * @inheritdoc
+     */
+    public function getName(): string
     {
         return 'Easytransac';
     }
 
-    public function getApiKey()
-    {
-        return $this->httpRequest->headers->get('EASYTRANSAC-API-KEY');
-    }
-
-    public function setApiKey(string $apiKey)
-    {
-        $this->httpRequest->headers->set('EASYTRANSAC-API-KEY', $apiKey);
-    }
-
-    public function purchase(array $parameters = array())
+    /**
+     * @inheritdoc
+     * @return PurchaseRequest
+     */
+    public function purchase(array $parameters = array()): PurchaseRequest
     {
         return $this->createRequest(PurchaseRequest::class, $parameters);
     }
 
+    /**
+     * @inheritdoc
+     * @return PurchaseRequest
+     */
     public function completePurchase(array $parameters = array())
     {
         return $this->createRequest(PurchaseRequest::class, $parameters);
+    }
+
+    public function refund()
+    {
+        // TODO: Implement @method \Omnipay\Common\Message\RequestInterface refund(array $options = array())
     }
 }
