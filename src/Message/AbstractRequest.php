@@ -2,15 +2,13 @@
 
 namespace Omnipay\Easytransac\Message;
 
-use Omnipay\Stripe\Message\Response;
-
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
-    protected $endpoint = 'https://www.easytransac.com/api';
+    protected string $endpoint = 'https://www.easytransac.com/api';
 
     abstract public function getEndpoint();
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return 'POST';
     }
@@ -20,7 +18,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->getParameter('apiKey');
     }
 
-    public function setApiKey(string $value)
+    public function setApiKey(string $value): AbstractRequest
     {
         return $this->setParameter('apiKey', $value);
     }

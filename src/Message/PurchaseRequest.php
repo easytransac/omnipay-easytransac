@@ -32,6 +32,16 @@ class PurchaseRequest extends AbstractRequest
             'ReturnUrl' => $this->getReturnUrl(),
         ];
 
+        // country are ISO3
+        if ($this->getCard()->getCountry() !== null)
+        {
+            $data['Country'] = strtoupper($this->getCard()->getCountry());
+            if (strlen($this->getCard()->getCountry()) > 3)
+            {
+                $data['Country'] = substr(strtoupper($this->getCard()->getCountry()), 0, 3);
+            }
+        }
+
         $data['Signature'] = $this->getSignature($data);
         $this->validate('amount', 'clientIp', 'card');
 

@@ -3,32 +3,35 @@
 namespace Omnipay\Easytransac;
 
 use Omnipay\Common\AbstractGateway as AbstractOmnipayGateway;
+use Omnipay\Common\Message\RequestInterface;
+use Omnipay\Easytransac\Message\CompletePurchaseRequest;
+use Omnipay\Easytransac\Message\PurchaseRequest;
 
 /**
  * Easytransac Gateway Driver for Omnipay
  *
  * This driver is based on Easytransac API documentation
  * @link https://www.easytransac.com/en/documentation
- * @method \Omnipay\Common\Message\RequestInterface authorize(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface completeAuthorize(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface capture(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface void(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface createCard(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface updateCard(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface deleteCard(array $options = array())
+ * @method RequestInterface authorize(array $options = array())
+ * @method RequestInterface completeAuthorize(array $options = array())
+ * @method RequestInterface capture(array $options = array())
+ * @method RequestInterface void(array $options = array())
+ * @method RequestInterface createCard(array $options = array())
+ * @method RequestInterface updateCard(array $options = array())
+ * @method RequestInterface deleteCard(array $options = array())
  */
 abstract class AbstractGateway  extends AbstractOmnipayGateway
 {
     /**
      * @inheritdoc
      */
-    abstract public function getName();
+    abstract public function getName(): string;
 
     /**
      * Get the gateway parameters.
      * @return array
      */
-    public function getDefaultParameters()
+    public function getDefaultParameters(): array
     {
         return array(
             'apiKey' => '',
@@ -47,14 +50,14 @@ abstract class AbstractGateway  extends AbstractOmnipayGateway
      * @param string $value
      * @return Gateway provides a fluent interface.
      */
-    public function setApiKey($value)
+    public function setApiKey(string $value): Gateway
     {
         return $this->setParameter('apiKey', $value);
     }
 
-    abstract public function purchase(array $parameters = array());
+    abstract public function purchase(array $parameters = array()): PurchaseRequest;
 
-    abstract public function completePurchase(array $parameters = array());
+    abstract public function completePurchase(array $parameters = array()): CompletePurchaseRequest;
 
     abstract public function refund();
 }

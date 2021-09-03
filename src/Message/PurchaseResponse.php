@@ -2,7 +2,6 @@
 
 namespace Omnipay\Easytransac\Message;
 
-
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RedirectResponseInterface;
 use Omnipay\Common\Message\RequestInterface;

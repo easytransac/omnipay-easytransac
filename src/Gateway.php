@@ -3,6 +3,7 @@
 namespace Omnipay\Easytransac;
 
 use Omnipay\Easytransac\Message\PurchaseRequest;
+use Omnipay\Easytransac\Message\CompletePurchaseRequest;
 
 /**
  * Easytransac Gateway Driver for Omnipay
@@ -31,11 +32,11 @@ class Gateway extends AbstractGateway
 
     /**
      * @inheritdoc
-     * @return PurchaseRequest
+     * @return CompletePurchaseRequest
      */
-    public function completePurchase(array $parameters = array())
+    public function completePurchase(array $parameters = array()): CompletePurchaseRequest
     {
-        return $this->createRequest(PurchaseRequest::class, $parameters);
+        return $this->createRequest(CompletePurchaseRequest::class, $parameters);
     }
 
     public function refund()

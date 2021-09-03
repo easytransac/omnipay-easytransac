@@ -2,12 +2,13 @@
 
 namespace Omnipay\Easytransac\Message;
 
+use Omnipay\Common\Exception\InvalidRequestException;
 use Omnipay\Tests\TestCase;
 
 class PurchaseRequestTest extends TestCase
 {
     private PurchaseRequest $request;
-    private $options;
+    private array $options;
 
     public function setUp()
     {
@@ -39,6 +40,9 @@ class PurchaseRequestTest extends TestCase
         ];
     }
 
+    /**
+     * @throws InvalidRequestException
+     */
     public function testGetData()
     {
         $this->request->initialize($this->options);
@@ -47,7 +51,7 @@ class PurchaseRequestTest extends TestCase
             'Amount' => 7610,
             'CardNumber' => '4111111111111111',
             'CardYear' => 2022,
-            'CardMonth' => 12,
+            'CardMonth' => '12',
             'CardCVV' => '123',
             'ClientIp' => '172.0.1.2',
             'OrderId' => 'PO_2021_05_121',
@@ -58,18 +62,21 @@ class PurchaseRequestTest extends TestCase
             'Address' => '204 avenue de Colmar',
             'ZipCode' => '67000',
             'City' =>  'Strasbourg',
-            'Country' =>  'France',
+            'Country' =>  'FRA',
             'CallingCode' =>  '33',
             'Phone' => '0611223344',
             'BirthDate' => '1990-01-02',
             '3DS' => 'no',
             'ReturnUrl' => 'https://www.example.com/return',
-            'Signature' => '6f92ac801a703a4151069070a170ed6392a31094'
+            'Signature' => '603cf47656d05906fd3e86fb08c9024951437f1f'
         ];
 
         $this->assertEquals($expected, $result);
     }
 
+    /**
+     * @throws InvalidRequestException
+     */
     public function testSendData()
     {
         $this->request->initialize($this->options);
