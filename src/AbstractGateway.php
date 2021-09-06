@@ -12,13 +12,6 @@ use Omnipay\Easytransac\Message\PurchaseRequest;
  *
  * This driver is based on Easytransac API documentation
  * @link https://www.easytransac.com/en/documentation
- * @method RequestInterface authorize(array $options = array())
- * @method RequestInterface completeAuthorize(array $options = array())
- * @method RequestInterface capture(array $options = array())
- * @method RequestInterface void(array $options = array())
- * @method RequestInterface createCard(array $options = array())
- * @method RequestInterface updateCard(array $options = array())
- * @method RequestInterface deleteCard(array $options = array())
  */
 abstract class AbstractGateway  extends AbstractOmnipayGateway
 {
@@ -59,5 +52,5 @@ abstract class AbstractGateway  extends AbstractOmnipayGateway
 
     abstract public function completePurchase(array $parameters = array()): CompletePurchaseRequest;
 
-    abstract public function refund();
+    abstract public function refund(): RequestInterface;
 }
