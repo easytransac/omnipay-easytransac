@@ -3,18 +3,12 @@
 namespace Omnipay\Easytransac\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
-use Omnipay\Common\Message\RedirectResponseInterface;
 
-class CompletePurchaseResponse extends AbstractResponse implements RedirectResponseInterface
+class CompletePurchaseResponse extends AbstractResponse
 {
     public function isSuccessful(): bool
     {
         return $this->data['Status'] == 'captured';
-    }
-
-    public function isRedirect(): bool
-    {
-        return false;
     }
 
     public function isPending(): bool
@@ -30,16 +24,6 @@ class CompletePurchaseResponse extends AbstractResponse implements RedirectRespo
     public function getMessage()
     {
         return $this->data['Message'];
-    }
-
-    public function getRedirectUrl()
-    {
-        return null;
-    }
-
-    public function getRedirectData(): array
-    {
-        return array();
     }
 
     public function getTransactionReference()

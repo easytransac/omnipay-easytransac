@@ -2,10 +2,12 @@
 
 namespace Omnipay\Easytransac\Message;
 
+use Omnipay\Common\Exception\InvalidRequestException;
+
 class PurchaseRequest extends AbstractRequest
 {
     /**
-     * @throws \Omnipay\Common\Exception\InvalidRequestException
+     * @throws InvalidRequestException
      */
     public function getData(): array
     {
@@ -51,5 +53,10 @@ class PurchaseRequest extends AbstractRequest
     public function getEndpoint()
     {
         return $this->endpoint.'/payment/direct';
+    }
+
+    protected function createResponse($data): PurchaseResponse
+    {
+        return $this->response = new PurchaseResponse($this, $data);
     }
 }

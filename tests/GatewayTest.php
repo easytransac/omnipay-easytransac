@@ -1,7 +1,9 @@
 <?php
 
+use Omnipay\Easytransac\Gateway;
 use Omnipay\Easytransac\Message\CompletePurchaseRequest;
 use Omnipay\Easytransac\Message\PurchaseRequest;
+use Omnipay\Easytransac\Message\RefundRequest;
 use Omnipay\Tests\GatewayTestCase;
 
 class GatewayTest extends GatewayTestCase
@@ -24,5 +26,11 @@ class GatewayTest extends GatewayTestCase
     {
         $request = $this->gateway->completePurchase();
         $this->assertInstanceOf(CompletePurchaseRequest::class, $request);
+    }
+
+    public function testRefund()
+    {
+        $request = $this->gateway->refund();
+        $this->assertInstanceOf(RefundRequest::class, $request);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Omnipay\Easytransac\Message;
 
-use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RedirectResponseInterface;
 use Omnipay\Common\Message\RequestInterface;
 
@@ -15,14 +14,9 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
         $this->data = json_decode($data, true);
     }
 
-    public function getCode()
-    {
-        return $this->data['Code'] ?? null;
-    }
-
     public function isSuccessful(): bool
     {
-        if (isset($this->data['Code']) && isset($this->data['Result']['Status'])) {
+        if (parent::isSuccessful() && isset($this->data['Result']['Status'])) {
             return $this->data['Code'] == 0 && in_array($this->data['Result']['Status'], ['authorized', 'captured']);
         }
 
@@ -36,11 +30,6 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
         }
 
         return false;
-    }
-
-    public function getMessage()
-    {
-        return $this->data['Result']['Message'] ?? null;
     }
 
     public function isRedirect(): bool
@@ -63,7 +52,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
         return $this->data['Result']['3DSecureUrl'] ?? null;
     }
 
-    public function getRedirectMethod()
+    public function getRedirectMethod(): string
     {
         return 'POST';
     }
