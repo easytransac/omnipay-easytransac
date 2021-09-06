@@ -6,6 +6,7 @@ use Omnipay\Common\AbstractGateway as AbstractOmnipayGateway;
 use Omnipay\Common\Message\RequestInterface;
 use Omnipay\Easytransac\Message\CompletePurchaseRequest;
 use Omnipay\Easytransac\Message\PurchaseRequest;
+use Omnipay\Easytransac\Message\RefundRequest;
 
 /**
  * Easytransac Gateway Driver for Omnipay
@@ -52,5 +53,5 @@ abstract class AbstractGateway  extends AbstractOmnipayGateway
 
     abstract public function completePurchase(array $parameters = array()): CompletePurchaseRequest;
 
-    abstract public function refund(): RequestInterface;
+    abstract public function refund(): RefundRequest;
 }

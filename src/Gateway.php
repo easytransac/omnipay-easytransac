@@ -43,10 +43,8 @@ class Gateway extends AbstractGateway
      * @inheritdoc
      * @return RefundRequest
      */
-    public function refund(array $parameters = array())
+    public function refund(array $parameters = array()): RefundRequest
     {
         return $this->createRequest(RefundRequest::class, $parameters);
     }
-
-
 }
