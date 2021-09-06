@@ -33,6 +33,7 @@ The following methods are provided by this package:
 
 + purchase
 + completePurchase
++ refund
 
 For general usage instructions, please see the main [Omnipay](https://github.com/thephpleague/omnipay)
 repository.
@@ -43,6 +44,8 @@ repository.
 If you are having general issues with Omnipay, we suggest posting on
 [Stack Overflow](http://stackoverflow.com/). Be sure to add the
 [omnipay tag](http://stackoverflow.com/questions/tagged/omnipay) so it can be easily found.
+
+If you are having specifical issues with Easytransac, please contact us: [support@easytransac.com](support@easytransac.com)
 
 If you want to keep up to date with release anouncements, discuss ideas for the project,
 or ask more detailed questions, there is also a [mailing list](https://groups.google.com/forum/#!forum/omnipay) which
