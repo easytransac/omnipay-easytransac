@@ -1,5 +1,7 @@
 # Omnipay: Easytransac
 
+[![PHP Composer](https://github.com/easytransac/omnipay-easytransac/actions/workflows/php.yml/badge.svg)](https://github.com/easytransac/omnipay-easytransac/actions/workflows/php.yml)
+
 **Easytransac driver for the Omnipay PHP payment processing library**
 
 <!--[![Build Status](https://travis-ci.org/thephpleague/omnipay-easytransac.png?branch=master)](https://travis-ci.org/thephpleague/omnipay-easytransac)-->
