@@ -3,7 +3,6 @@
 namespace Omnipay\Easytransac;
 
 use Omnipay\Common\AbstractGateway as AbstractOmnipayGateway;
-use Omnipay\Common\Message\RequestInterface;
 use Omnipay\Easytransac\Message\CompletePurchaseRequest;
 use Omnipay\Easytransac\Message\PurchaseRequest;
 use Omnipay\Easytransac\Message\RefundRequest;
@@ -14,7 +13,7 @@ use Omnipay\Easytransac\Message\RefundRequest;
  * This driver is based on Easytransac API documentation
  * @link https://www.easytransac.com/en/documentation
  */
-abstract class AbstractGateway  extends AbstractOmnipayGateway
+abstract class AbstractGateway extends AbstractOmnipayGateway
 {
     /**
      * @inheritdoc

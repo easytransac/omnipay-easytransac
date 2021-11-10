@@ -19,7 +19,7 @@ class RefundRequest extends AbstractRequest
 
     public function getEndpoint(): string
     {
-        return $this->endpoint.'/payment/refund';
+        return $this->endpoint . '/payment/refund';
     }
 
     protected function createResponse($data): RefundResponse

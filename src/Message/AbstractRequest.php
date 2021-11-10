@@ -9,6 +9,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     protected string $endpoint = 'https://www.easytransac.com/api';
 
     abstract public function getEndpoint();
+
     abstract protected function createResponse($data);
 
     public function getHttpMethod(): string
@@ -73,7 +74,13 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             'Content-Type' => 'application/x-www-form-urlencoded',
         ];
 
-        $httpResponse = $this->httpClient->request($this->getHttpMethod(), $this->getEndpoint(), $headers, http_build_query($data));
+        $httpResponse = $this->httpClient->request(
+            $this->getHttpMethod(),
+            $this->getEndpoint(),
+            $headers,
+            http_build_query($data)
+        );
+
         return $this->createResponse($httpResponse->getBody()->getContents());
     }
 }

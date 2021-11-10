@@ -1,6 +1,7 @@
 <?php
 
-use Omnipay\Easytransac\Gateway;
+namespace Omnipay\Easytransac;
+
 use Omnipay\Easytransac\Message\CompletePurchaseRequest;
 use Omnipay\Easytransac\Message\PurchaseRequest;
 use Omnipay\Easytransac\Message\RefundRequest;

@@ -35,11 +35,9 @@ class PurchaseRequest extends AbstractRequest
         ];
 
         // country are ISO3
-        if ($this->getCard()->getCountry() !== null)
-        {
+        if ($this->getCard()->getCountry() !== null) {
             $data['Country'] = strtoupper($this->getCard()->getCountry());
-            if (strlen($this->getCard()->getCountry()) > 3)
-            {
+            if (strlen($this->getCard()->getCountry()) > 3) {
                 $data['Country'] = substr(strtoupper($this->getCard()->getCountry()), 0, 3);
             }
         }
@@ -50,9 +48,9 @@ class PurchaseRequest extends AbstractRequest
         return $data;
     }
 
-    public function getEndpoint()
+    public function getEndpoint(): string
     {
-        return $this->endpoint.'/payment/direct';
+        return $this->endpoint . '/payment/direct';
     }
 
     protected function createResponse($data): PurchaseResponse
