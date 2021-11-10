@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: macos-11
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -26,6 +26,10 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-php-
 
+    - name: Set PHP version to 7.4
+      with:
+        php-version: '7.4'
+        
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
