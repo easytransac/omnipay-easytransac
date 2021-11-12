@@ -1,7 +1,7 @@
 # Omnipay: Easytransac
-[![Build](https://github.com/easytransac/omnipay-easytransac/actions/workflows/build.yml/badge.svg)]()
-[![PSR12](https://github.com/easytransac/omnipay-easytransac/actions/workflows/psr12.yml/badge.svg)]()
-[![Test](https://github.com/easytransac/omnipay-easytransac/actions/workflows/test.yml/badge.svg)]()
+[![Build](https://github.com/easytransac/omnipay-easytransac/actions/workflows/build.yml/badge.svg)](https://github.com/easytransac/omnipay-easytransac/actions/workflows/build.yml)
+[![PSR12](https://github.com/easytransac/omnipay-easytransac/actions/workflows/psr12.yml/badge.svg)](https://github.com/easytransac/omnipay-easytransac/actions/workflows/psr12.yml)
+[![Test](https://github.com/easytransac/omnipay-easytransac/actions/workflows/test.yml/badge.svg)](https://github.com/easytransac/omnipay-easytransac/actions/workflows/test.yml)
 
 **Easytransac driver for the Omnipay PHP payment processing library**
 
